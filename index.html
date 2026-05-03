@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Ali & Syifa</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #d4af37;
+            --text-light: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1); 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+            background-color: #1a1a1a;
+            overflow: hidden; 
+        }
+
+        /* --- ANIMASI BUNGA BERTERBANGAN --- */
+        .petal {
+            position: fixed;
+            top: -10%;
+            z-index: 9998;
+            pointer-events: none;
+            user-select: none;
+            color: #ffc0cb; /* Warna pink soft */
+            font-size: 1.5rem;
+            opacity: 0.8;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* --- BACKGROUND --- */
+        .main-wrapper {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        #cover {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            transition: transform 1s ease-in-out, opacity 1s;
+        }
+
+        .cover-content {
+            padding: 40px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0; 
+            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        #cover h1 { font-family: 'Sacramento', cursive; font-size: 4.5rem; color: var(--gold); margin: 20px 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+
+        .btn-open {
+            padding: 12px 35px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 0; 
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 2px;
+        }
+
+        #main-content { display: none; opacity: 0; }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 0; 
+            padding: 40px 25px;
+            margin: 20px 0;
+        }
+
+        .salam { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 15px; }
+        .basmalah { font-size: 2rem; color: var(--gold); margin-bottom: 15px; font-family: serif; }
+        
+        .couple-name {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin: 10px 0;
+        }
+
+        .event-item {
+            padding: 20px 0;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+        }
+        .event-item:last-child { border-bottom: none; }
+        .event-title { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.4rem; margin-bottom: 5px; }
+
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .timer-box {
+            background: var(--gold);
+            color: #000;
+            padding: 10px;
+            border-radius: 0;
+            min-width: 70px;
+        }
+        .timer-box span { display: block; font-size: 1.5rem; font-weight: 600; }
+        .timer-box small { font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+
+        footer { 
+            padding: 80px 20px; 
+            text-align: center;
+            font-size: 0.9rem; 
+            opacity: 0.9; 
+        }
+
+        input, textarea, select {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2);
+            color: white; border-radius: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .msg-box {
+            text-align: left; max-height: 300px; overflow-y: auto;
+            background: rgba(0,0,0,0.5); padding: 15px; border-radius: 0;
+        }
+
+        .map-responsive {
+            overflow: hidden; padding-bottom: 56.25%; position: relative; height: 0; margin-top: 20px;
+        }
+        .map-responsive iframe {
+            left: 0; top: 0; height: 100%; width: 100%; position: absolute; border: 0;
+        }
+    </style>
+</head>
+<body>
+
+<audio id="music" loop>
+    <source src="lagu-ali-syifa.mp3.mp3" type="audio/mpeg">
+</audio>
+
+<!-- KONTAINER UNTUK BUNGA -->
+<div id="petal-container"></div>
+
+<!-- COVER -->
+<div id="cover">
+    <div class="cover-content" data-aos="zoom-in">
+        <h2 style="font-weight: 300; letter-spacing: 5px; font-size: 0.9rem;">THE WEDDING OF</h2>
+        <h1>Ali & Syifa</h1>
+        <p style="margin-bottom: 10px; font-size: 0.8rem; letter-spacing: 1px;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+        <span id="guest-name" style="font-weight: 600; font-size: 1.5rem; color: var(--gold); display: block; margin-bottom: 20px;">Tamu Undangan</span>
+        <button class="btn-open" onclick="openInvitation()">
+            <i class="fas fa-envelope-open"></i> BUKA UNDANGAN
+        </button>
+    </div>
+</div>
+
+<div class="main-wrapper" id="main-content">
+    <!-- PEMBUKAAN -->
+    <section class="section">
+        <div data-aos="fade-up">
+            <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--gold); margin-bottom: 10px; font-weight: 600;">BISMILLAHIRRAHMANIRRAHIM</p>
+            <h2 class="basmalah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</h2>
+        </div>
+        <div class="glass-card" data-aos="fade-up">
+            <h3 class="salam">Assalamualaikum Wr. Wb.</h3>
+            <p style="font-weight: 300; line-height: 1.8;">Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan penuh rasa syukur dan memohon ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam momen bahagia pernikahan kami.</p>
+        </div>
+    </section>
+
+    <!-- MEMPELAI -->
+    <section class="section">
+        <p style="color: var(--gold); letter-spacing: 4px; margin-bottom: 5px; font-size: 0.8rem; font-weight: 600;">MEMPELAI</p>
+        <div data-aos="fade-right">
+            <h2 class="couple-name">Ii Muhammad Ali Ramdani</h2>
+            <p style="font-weight: 300;">Putra dari Bapak Cecep Supriadi & Ibu Siti Riningsih</p>
+        </div>
+        <div style="font-size: 2.5rem; color: var(--gold); margin: 20px 0; font-family: 'Playfair Display';">&</div>
+        <div data-aos="fade-left">
+            <h3 class="couple-name">Syifa Rahimah</h3>
+            <p style="font-weight: 300;">Putri dari Bapak Herlan Syah & Ibu Wari Warliah</p>
+        </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section class="section">
+        <div class="glass-card" data-aos="fade-up">
+            <div class="event-item">
+                <h4 class="event-title">Akad Nikah</h4>
+                <p style="color: var(--gold); font-weight: 600;">08.00 - 10.00 WIB</p>
+            </div>
+            <div class="event-item">
+                <h4 class="event-title">Resepsi Pernikahan</h4>
+                <p style="color: var(--gold); font-weight: 600;">10.00 - Selesai WIB</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HITUNG MUNDUR -->
+    <section class="section">
+        <div class="glass-card" data-aos="zoom-in">
+            <h3 style="font-family: 'Playfair Display'; margin-bottom: 20px; letter-spacing: 3px;">MENUJU HARI BAHAGIA</h3>
+            <div class="countdown-wrapper">
+                <div class="timer-box"><span id="days">00</span><small>Hari</small></div>
+                <div class="timer-box"><span id="hours">00</span><small>Jam</small></div>
+                <div class="timer-box"><span id="minutes">00</span><small>Menit</small></div>
+                <div class="timer-box"><span id="seconds">00</span><small>Detik</small></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOKASI -->
+    <section class="section">
+        <div class="glass-card" data-aos="fade-up">
+            <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; color: var(--gold); margin-bottom: 10px;"></i>
+            <h4 style="margin-bottom: 10px;">Kamis, 04 Juni 2026</h4>
+            <p style="font-weight: 300; margin-bottom: 20px;">Kp. Pasirbaru, Kec. Naringgul, Cianjur</p>
+            <a href="https://maps.app.goo.gl/ZH2tnuHn6Lvjm4Uy6" target="_blank" class="btn-open">LIHAT PETA</a>
+        </div>
+    </section>
+
+    <!-- BUKU TAMU -->
+    <section class="section">
+        <div class="glass-card">
+            <form id="wishForm">
+                <input type="text" id="nama" placeholder="Nama Lengkap" required>
+                <select id="hadir">
+                    <option value="" disabled selected>Konfirmasi Kehadiran</option>
+                    <option value="Hadir">Hadir</option>
+                    <option value="Tidak Hadir">Tidak Hadir</option>
+                </select>
+                <textarea id="pesan" rows="4" placeholder="Tulis ucapan..." required></textarea>
+                <button type="submit" class="btn-open" style="width: 100%;">KIRIM UCAPAN</button>
+            </form>
+            <div class="msg-box" id="msgDisplay" style="margin-top: 30px;"></div>
+        </div>
+    </section>
+
+    <footer>
+        <h1 class="couple-name">Ali & Syifa</h1>
+    </footer>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  const firebaseConfig = { databaseURL: "https://undanganalisyifa-default-rtdb.asia-southeast1.firebasedatabase.app/" };
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const messagesRef = ref(db, 'ucapan');
+
+  AOS.init({ duration: 1000, once: true });
+
+  // SCRIPT BUNGA BERTERBANGAN
+  function createPetal() {
+      const petal = document.createElement('div');
+      const container = document.getElementById('petal-container');
+      const symbols = ['🌸', '✨', '🤍', '🍃'];
+      
+      petal.classList.add('petal');
+      petal.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5 detik
+      petal.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      
+      container.appendChild(petal);
+
+      setTimeout(() => {
+          petal.remove();
+      }, 5000);
+  }
+
+  setInterval(createPetal, 300); // Muncul setiap 0.3 detik
+
+  window.openInvitation = function() {
+      document.getElementById('cover').style.transform = 'translateY(-100%)';
+      document.getElementById('cover').style.opacity = '0';
+      const content = document.getElementById('main-content');
+      content.style.display = 'block';
+      setTimeout(() => { content.style.opacity = '1'; }, 100);
+      document.getElementById('music').play();
+      document.body.style.overflow = 'auto';
+      setTimeout(() => { AOS.refresh(); }, 500);
+  }
+
+  // Countdown & Guest Name Logic
+  const urlParams = new URLSearchParams(window.location.search);
+  const namaTamu = urlParams.get('to');
+  if (namaTamu) document.getElementById('guest-name').innerText = namaTamu;
+
+  const countdownDate = new Date("June 4, 2026 08:00:00").getTime();
+  setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+      document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+  }, 1000);
+
+  // Firebase Logic
+  const wishForm = document.getElementById('wishForm');
+  wishForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      push(messagesRef, {
+          nama: document.getElementById('nama').value,
+          pesan: document.getElementById('pesan').value,
+          hadir: document.getElementById('hadir').value,
+          createdAt: serverTimestamp()
+      }).then(() => wishForm.reset());
+  });
+
+  onValue(messagesRef, (snapshot) => {
+      const container = document.getElementById('msgDisplay');
+      container.innerHTML = "";
+      const data = snapshot.val();
+      if (data) {
+          Object.keys(data).reverse().forEach((key) => {
+              const val = data[key];
+              const item = document.createElement('div');
+              item.style.padding = "10px 0";
+              item.style.borderBottom = "1px solid rgba(255,255,255,0.1)";
+              item.innerHTML = `<b style="color:var(--gold)">${val.nama}</b><br><small>${val.pesan}</small>`;
+              container.appendChild(item);
+          });
+      }
+  });
+</script>
+
+</body>
+</html>
