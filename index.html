@@ -12,17 +12,18 @@
 
     <style>
         :root {
-            --gold: #d4af37;
-            --text-light: #ffffff;
-            --glass: rgba(255, 255, 255, 0.1); 
+            --gold: #b8860b; /* Warna emas sedikit lebih kontras untuk background terang */
+            --text-dark: #333333;
+            --cream: #fdf5e6;
+            --glass: rgba(255, 255, 255, 0.7); 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
-            color: var(--text-light);
-            background-color: #1a1a1a;
+            color: var(--text-dark);
+            background-color: var(--cream);
             overflow: hidden; 
         }
 
@@ -33,7 +34,7 @@
             z-index: 9998;
             pointer-events: none;
             user-select: none;
-            color: #ffc0cb; /* Warna pink soft */
+            color: #ffc0cb; 
             font-size: 1.5rem;
             opacity: 0.8;
             animation: fall linear forwards;
@@ -47,7 +48,8 @@
 
         /* --- BACKGROUND --- */
         .main-wrapper {
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
+            /* Overlay krem agar foto tetap ada tapi nuansanya ligth cream */
+            background: linear-gradient(rgba(253, 245, 230, 0.8), rgba(253, 245, 230, 0.9)), 
                         url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -63,7 +65,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
+            background: linear-gradient(rgba(253, 245, 230, 0.6), rgba(253, 245, 230, 0.7)), 
                         url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -73,19 +75,19 @@
 
         .cover-content {
             padding: 40px 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(184, 134, 11, 0.3);
             border-radius: 0; 
             backdrop-filter: blur(8px);
-            background: rgba(0,0,0,0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        #cover h1 { font-family: 'Sacramento', cursive; font-size: 4.5rem; color: var(--gold); margin: 20px 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        #cover h1 { font-family: 'Sacramento', cursive; font-size: 4.5rem; color: var(--gold); margin: 20px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
 
         .btn-open {
             padding: 12px 35px;
             background: var(--gold);
-            color: #000;
+            color: #fff;
             border: none;
             border-radius: 0; 
             font-weight: 600;
@@ -106,12 +108,13 @@
         }
 
         .glass-card {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(184, 134, 11, 0.2);
             border-radius: 0; 
             padding: 40px 25px;
             margin: 20px 0;
+            color: var(--text-dark);
         }
 
         .salam { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 15px; }
@@ -126,7 +129,7 @@
 
         .event-item {
             padding: 20px 0;
-            border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+            border-bottom: 1px dashed rgba(184, 134, 11, 0.3);
         }
         .event-item:last-child { border-bottom: none; }
         .event-title { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.4rem; margin-bottom: 5px; }
@@ -139,7 +142,7 @@
         }
         .timer-box {
             background: var(--gold);
-            color: #000;
+            color: #fff;
             padding: 10px;
             border-radius: 0;
             min-width: 70px;
@@ -152,18 +155,20 @@
             text-align: center;
             font-size: 0.9rem; 
             opacity: 0.9; 
+            color: var(--text-dark);
         }
 
         input, textarea, select {
             width: 100%; padding: 12px; margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2);
-            color: white; border-radius: 0;
+            background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(184, 134, 11, 0.2);
+            color: #333; border-radius: 0;
             font-family: 'Poppins', sans-serif;
         }
 
         .msg-box {
             text-align: left; max-height: 300px; overflow-y: auto;
-            background: rgba(0,0,0,0.5); padding: 15px; border-radius: 0;
+            background: rgba(255, 255, 255, 0.7); padding: 15px; border-radius: 0;
+            color: var(--text-dark);
         }
 
         .map-responsive {
@@ -171,6 +176,14 @@
         }
         .map-responsive iframe {
             left: 0; top: 0; height: 100%; width: 100%; position: absolute; border: 0;
+        }
+
+        .ar-rum {
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: var(--text-dark);
         }
     </style>
 </head>
@@ -186,9 +199,9 @@
 <!-- COVER -->
 <div id="cover">
     <div class="cover-content" data-aos="zoom-in">
-        <h2 style="font-weight: 300; letter-spacing: 5px; font-size: 0.9rem;">THE WEDDING OF</h2>
+        <h2 style="font-weight: 300; letter-spacing: 5px; font-size: 0.9rem; color: var(--text-dark);">THE WEDDING OF</h2>
         <h1>Ali & Syifa</h1>
-        <p style="margin-bottom: 10px; font-size: 0.8rem; letter-spacing: 1px;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+        <p style="margin-bottom: 10px; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-dark);">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
         <span id="guest-name" style="font-weight: 600; font-size: 1.5rem; color: var(--gold); display: block; margin-bottom: 20px;">Tamu Undangan</span>
         <button class="btn-open" onclick="openInvitation()">
             <i class="fas fa-envelope-open"></i> BUKA UNDANGAN
@@ -203,6 +216,15 @@
             <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--gold); margin-bottom: 10px; font-weight: 600;">BISMILLAHIRRAHMANIRRAHIM</p>
             <h2 class="basmalah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</h2>
         </div>
+        
+        <!-- PENAMBAHAN SURAT AR-RUM -->
+        <div class="glass-card" data-aos="fade-up">
+            <p class="ar-rum">
+                "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+            </p>
+            <p style="font-weight: 600; color: var(--gold);">( QS. Ar-Rum: 21 )</p>
+        </div>
+
         <div class="glass-card" data-aos="fade-up">
             <h3 class="salam">Assalamualaikum Wr. Wb.</h3>
             <p style="font-weight: 300; line-height: 1.8;">Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan penuh rasa syukur dan memohon ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam momen bahagia pernikahan kami.</p>
@@ -254,6 +276,8 @@
     <section class="section">
         <div class="glass-card" data-aos="fade-up">
             <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; color: var(--gold); margin-bottom: 10px;"></i>
+            <!-- PENAMBAHAN KETERANGAN KEDIAMAN MEMPELAI WANITA -->
+            <h3 style="color: var(--gold); font-family: 'Playfair Display'; margin-bottom: 10px;">Kediaman Mempelai Wanita</h3>
             <h4 style="margin-bottom: 10px;">Kamis, 04 Juni 2026</h4>
             <p style="font-weight: 300; margin-bottom: 20px;">Kp. Pasirbaru, Kec. Naringgul, Cianjur</p>
             <a href="https://maps.app.goo.gl/ZH2tnuHn6Lvjm4Uy6" target="_blank" class="btn-open">LIHAT PETA</a>
@@ -304,7 +328,7 @@
       petal.classList.add('petal');
       petal.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
       petal.style.left = Math.random() * 100 + 'vw';
-      petal.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5 detik
+      petal.style.animationDuration = (Math.random() * 3 + 2) + 's'; 
       petal.style.fontSize = (Math.random() * 10 + 10) + 'px';
       
       container.appendChild(petal);
@@ -314,7 +338,7 @@
       }, 5000);
   }
 
-  setInterval(createPetal, 300); // Muncul setiap 0.3 detik
+  setInterval(createPetal, 300);
 
   window.openInvitation = function() {
       document.getElementById('cover').style.transform = 'translateY(-100%)';
@@ -327,7 +351,6 @@
       setTimeout(() => { AOS.refresh(); }, 500);
   }
 
-  // Countdown & Guest Name Logic
   const urlParams = new URLSearchParams(window.location.search);
   const namaTamu = urlParams.get('to');
   if (namaTamu) document.getElementById('guest-name').innerText = namaTamu;
@@ -342,7 +365,6 @@
       document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
   }, 1000);
 
-  // Firebase Logic
   const wishForm = document.getElementById('wishForm');
   wishForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -363,7 +385,7 @@
               const val = data[key];
               const item = document.createElement('div');
               item.style.padding = "10px 0";
-              item.style.borderBottom = "1px solid rgba(255,255,255,0.1)";
+              item.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
               item.innerHTML = `<b style="color:var(--gold)">${val.nama}</b><br><small>${val.pesan}</small>`;
               container.appendChild(item);
           });
